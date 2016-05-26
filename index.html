@@ -4,6 +4,18 @@
     <meta charset="utf-8">
     <title>Lodash Practice</title>
 
+    <!-- template -->
+    <script type="text/html" id="template">
+      <table>
+        <tr><td>index</td><td>username</td></tr>
+        <!-- for loop -->
+        <% for (var i in data) {%>
+          <!-- display index and username -->
+          <tr><td><%= i %></td><td><%= data[i] %></td></tr>
+        <% } %>
+      </table>
+    </script>
+
   </head>
   <body>
 
