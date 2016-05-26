@@ -105,14 +105,79 @@ var data = [
 function displayData(data) {
   // load template text
   var template = $('#template').html();
-  // complie template and bind context
+  // compile template and bind data text
   var compiled_html = _.template(template)({
     data: data
   });
-  // appent to body
+  // append to body
   $('body').append(compiled_html);
 }
 
 $(function() {
   displayData(data);
 });
+
+
+// matches
+var f = _.matches('hello');
+f('world');
+// -> false
+f('hello');
+// -> true
+
+// find
+var users = [
+  {
+    name: 'Alex',
+    age: 30,
+    is_premium: false
+  },
+  {
+    name: 'Bob',
+    age: 20,
+    is_premium: true
+  },
+  {
+    name: 'Mary',
+    age: 25,
+    is_premium: false
+  }
+];
+
+_.find(users, function(user) {
+  console.log (user);
+  return user.age > 18;
+});
+
+_.find(users, 'is_premium');
+
+_.map(users, {name: 'Alex'}); // Use _.matches
+// -> [true, false, false]
+
+_.map(users, ['name', 'Alex']); // Use _.matchesProperty
+// -> [true, false, false]
+
+_.map(users, 'name'); // Use _.property
+// -> ["Alex", "Bob", "Mary"]
+
+// loops
+// traditional js
+var grandTotal = 0,
+  somePercentage = 1.07,
+  severalNumbers = [33, 54, 42],
+  i; // don't forget to hoist those indices;
+
+for(i = 0; i < severalNumbers.length; i++) {
+  var aNumber = severalNumbers[i];
+  grandTotal += aNumber * somePercentage;
+}
+
+// loops
+//underscore
+var somePercentage = 1.07,
+  severalNumbers = [33, 54, 42],
+  grandTotal;
+
+grandTotal = _.reduce(severalNumbers, function(runningTotal, aNumber) {
+  return runningTotal + (aNumber * somePercentage);
+}, 0)
